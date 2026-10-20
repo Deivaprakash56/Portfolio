@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-deep: var(--accent-deep);
+  --color-on-accent: var(--on-accent);
+  --color-dark: var(--surface-inverse);
+  --color-dark-elevated: var(--surface-inverse-elevated);
+  --color-dark-muted: var(--ink-on-inverse-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --font-display: "Syne", ui-sans-serif, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  --bg: #f4f2ee;
+  --bg-alt: #ebe8e2;
+  --bg-elevated: #fffcf8;
+  --ink: #121212;
+  --ink-muted: #5c5a56;
+  --ink-faint: #8a8780;
+  --accent: #e8570a;
+  --accent-soft: #fff0e6;
+  --accent-deep: #c44708;
+  --on-accent: #fffaf6;
+  --surface-inverse: #141414;
+  --surface-inverse-elevated: #1c1c1c;
+  --ink-on-inverse: #f4f2ee;
+  --ink-on-inverse-muted: #a8a6a1;
+  --line: #d9d5ce;
+  --line-strong: #c4bfb5;
+  --hero-bg: #141414;
+  --hero-ink: #f4f2ee;
+  --hero-muted: #a8a6a1;
+  --hero-line: rgba(255, 255, 255, 0.12);
+  --hero-elevated: #1c1c1c;
+}
+
+html.dark {
+  --bg: #0f1113;
+  --bg-alt: #161a1e;
+  --bg-elevated: #1c2127;
+  --ink: #f2f0eb;
+  --ink-muted: #a8a6a1;
+  --ink-faint: #7a7872;
+  --accent: #ff6b1a;
+  --accent-soft: #2a180f;
+  --accent-deep: #ff853f;
+  --on-accent: #fffaf6;
+  --surface-inverse: #0a0c0e;
+  --surface-inverse-elevated: #14181c;
+  --ink-on-inverse: #f2f0eb;
+  --ink-on-inverse-muted: #a8a6a1;
+  --line: #2a3038;
+  --line-strong: #3a424c;
+  --hero-bg: #0a0c0e;
+  --hero-ink: #f2f0eb;
+  --hero-muted: #a8a6a1;
+  --hero-line: rgba(255, 255, 255, 0.1);
+  --hero-elevated: #14181c;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: color-mix(in srgb, var(--accent) 28%, transparent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+  .bg-hero { background-color: var(--hero-bg); }
+  .text-hero { color: var(--hero-ink); }
+  .text-hero-muted { color: var(--hero-muted); }
+  .border-hero-line { border-color: var(--hero-line); }
+  .bg-hero-elevated { background-color: var(--hero-elevated); }
+  .grid-tech {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .grid-tech-dark {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, #ffffff 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, #ffffff 6%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .text-balance { text-wrap: balance; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset: 240; }
+  to { stroke-dashoffset: 0; }
+}
+.animate-fade-up { animation: fade-up 0.7s ease-out both; }
+.animate-fade-up-delay-1 { animation: fade-up 0.7s ease-out 0.1s both; }
+.animate-fade-up-delay-2 { animation: fade-up 0.7s ease-out 0.2s both; }
+.animate-fade-up-delay-3 { animation: fade-up 0.7s ease-out 0.3s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

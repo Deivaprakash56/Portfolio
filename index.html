@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deivaprakash — Robotics Engineer</title>
+    <meta
+      name="description"
+      content="Deivaprakash — robotics engineer working across AMR deployments, customer-facing engineering, and execution that turns robot capability into real-world outcomes."
+    />
+    <meta name="author" content="Deivaprakash" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Deivaprakash — Making robotics work in the real world" />
+    <meta
+      property="og:description"
+      content="Robotics engineer. AMR deployments, customer success engineering, and field execution."
+    />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Deivaprakash — Making robotics work in the real world" />
+    <meta
+      name="twitter:description"
+      content="Robotics Engineer | AMR Deployments | Customer Success | Execution"
+    />
+    <meta name="twitter:image" content="/og-image.svg" />
+    <script>
+      (function () {
+        try {
+          var key = 'deivaprakash-theme'
+          var stored = localStorage.getItem(key)
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          if (theme === 'dark') document.documentElement.classList.add('dark')
+          document.documentElement.style.colorScheme = theme
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
