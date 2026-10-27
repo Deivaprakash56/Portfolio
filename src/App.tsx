@@ -4,9 +4,6 @@ import { Nav } from './components/Nav'
 import { QuickActions } from './components/QuickActions'
 import { NumbersProvider } from './lib/numbers'
 import { ThemeProvider } from './lib/theme'
-import { Admin } from './pages/Admin'
-import { CaseStudiesIndex } from './pages/CaseStudiesIndex'
-import { CaseStudyPage } from './pages/CaseStudyPage'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 
@@ -26,9 +23,6 @@ export default function App() {
             <main id="main">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/case-studies" element={<CaseStudiesIndex />} />
-                <Route path="/case-studies/:slug" element={<CaseStudyPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

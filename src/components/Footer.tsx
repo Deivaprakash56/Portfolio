@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { links, site } from '../data/content'
 import { isReady } from '../lib/links'
 
@@ -23,12 +22,11 @@ export function Footer() {
           {isReady(links.github) && (
             <a href={links.github.href} target="_blank" rel="noopener noreferrer" className="text-ink-muted transition-colors hover:text-accent">GitHub</a>
           )}
-          <Link to="/case-studies" className="text-ink-muted transition-colors hover:text-accent">Case studies</Link>
         </div>
       </div>
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-4 font-mono text-[11px] tracking-wide text-ink-faint uppercase md:flex-row md:justify-between md:px-8">
-          <p>Built for clarity, not hype. Claims stay within verified scope.</p>
+          <p>Robotics that has to work on a real floor.</p>
           <p>© {new Date().getFullYear()} {site.fullName}</p>
         </div>
       </div>

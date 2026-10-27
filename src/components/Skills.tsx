@@ -1,5 +1,6 @@
 import { skillCategories, type SkillLevel } from '../data/content'
 import { Section } from './Section'
+import { skillIllustrations } from './SkillIllustrations'
 
 const levelLabel: Record<SkillLevel, string> = {
   'hands-on': 'Hands-on',
@@ -8,43 +9,62 @@ const levelLabel: Record<SkillLevel, string> = {
 }
 
 const levelStyle: Record<SkillLevel, string> = {
-  'hands-on': 'border-accent/40 bg-accent-soft text-accent-deep',
-  familiar: 'border-line bg-bg text-ink-muted',
-  conceptual: 'border-dashed border-line-strong bg-transparent text-ink-faint',
+  'hands-on': 'border-accent/40 bg-accent-soft text-ink',
+  familiar: 'border-line bg-bg-elevated text-ink',
+  conceptual: 'border-dashed border-line-strong bg-transparent text-ink-muted',
+}
+
+const levelDot: Record<SkillLevel, string> = {
+  'hands-on': 'bg-accent',
+  familiar: 'bg-ink-faint',
+  conceptual: 'border border-ink-faint bg-transparent',
 }
 
 export function Skills() {
   return (
     <Section
       id="skills"
-      eyebrow="Technical capabilities"
-      title="Skills by category—not arbitrary percentages."
-      description="Levels distinguish hands-on expertise from familiarity or conceptual knowledge. Only technologies that reflect real experience are listed."
+      eyebrow="Skills"
+      title="What I bring to a deployment."
+      description="Hands-on means I use it on the job. Familiar means I have worked with it. Conceptual means I know how it fits."
+      className="bg-bg-alt"
     >
-      <div className="mb-8 flex flex-wrap gap-3 text-xs">
+      <div className="mb-10 flex flex-wrap gap-5 text-xs">
         {(Object.keys(levelLabel) as SkillLevel[]).map((level) => (
-          <span key={level} className={`rounded-sm border px-2.5 py-1 font-mono tracking-wide uppercase ${levelStyle[level]}`}>
+          <span key={level} className="inline-flex items-center gap-2 font-mono tracking-wide text-ink-muted uppercase">
+            <span className={`h-2 w-2 rounded-full ${levelDot[level]}`} aria-hidden />
             {levelLabel[level]}
           </span>
         ))}
       </div>
-      <div className="space-y-10">
-        {skillCategories.map((category) => (
-          <div key={category.title} className="border-t border-line pt-8">
-            <div className="mb-5 max-w-2xl">
-              <h3 className="font-display text-xl font-bold tracking-tight">{category.title}</h3>
-              <p className="mt-1 text-sm text-ink-muted">{category.description}</p>
+      <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+        {skillCategories.map((category, i) => {
+          const Illustration = skillIllustrations[category.title]
+          return (
+            <div
+              key={category.title}
+              className={`group overflow-hidden rounded-3xl border border-line bg-bg-elevated transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_24px_48px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] ${i === 0 ? 'md:col-span-2' : ''}`}
+            >
+              <div className="relative h-40 border-b border-line bg-bg md:h-44">
+                <div className="pointer-events-none absolute inset-0 grid-tech opacity-60" aria-hidden />
+                <div className="relative h-full p-4">{Illustration ? <Illustration /> : null}</div>
+              </div>
+              <div className="p-7 md:p-8">
+                <h3 className="font-display text-xl font-bold tracking-tight">{category.title}</h3>
+                <p className="mt-1 text-sm text-ink-muted">{category.description}</p>
+                <ul className="mt-6 flex flex-wrap gap-x-2.5 gap-y-3">
+                  {category.skills.map((skill) => (
+                    <li key={skill.name} title={levelLabel[skill.level]} className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium ${levelStyle[skill.level]}`}>
+                      <span className={`h-1.5 w-1.5 rounded-full ${levelDot[skill.level]}`} aria-hidden />
+                      {skill.name}
+                      <span className="sr-only">({levelLabel[skill.level]})</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <ul className="flex flex-wrap gap-2">
-              {category.skills.map((skill) => (
-                <li key={skill.name} className={`inline-flex items-center gap-2 rounded-sm border px-3 py-2 text-sm ${levelStyle[skill.level]}`}>
-                  <span className="font-medium text-ink">{skill.name}</span>
-                  <span className="font-mono text-[10px] tracking-wide uppercase opacity-80">{levelLabel[skill.level]}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </Section>
   )

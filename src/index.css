@@ -16,57 +16,57 @@
   --color-dark-muted: var(--ink-on-inverse-muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --font-display: "Syne", ui-sans-serif, sans-serif;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --bg: #f4f2ee;
-  --bg-alt: #ebe8e2;
-  --bg-elevated: #fffcf8;
-  --ink: #121212;
-  --ink-muted: #5c5a56;
-  --ink-faint: #8a8780;
-  --accent: #e8570a;
-  --accent-soft: #fff0e6;
-  --accent-deep: #c44708;
-  --on-accent: #fffaf6;
-  --surface-inverse: #141414;
-  --surface-inverse-elevated: #1c1c1c;
-  --ink-on-inverse: #f4f2ee;
-  --ink-on-inverse-muted: #a8a6a1;
-  --line: #d9d5ce;
-  --line-strong: #c4bfb5;
-  --hero-bg: #141414;
-  --hero-ink: #f4f2ee;
-  --hero-muted: #a8a6a1;
-  --hero-line: rgba(255, 255, 255, 0.12);
-  --hero-elevated: #1c1c1c;
+  --bg: #ffffff;
+  --bg-alt: #f5f7fb;
+  --bg-elevated: #ffffff;
+  --ink: #0b1220;
+  --ink-muted: #4b5567;
+  --ink-faint: #8a94a6;
+  --accent: #2563eb;
+  --accent-soft: #eef3ff;
+  --accent-deep: #1d4ed8;
+  --on-accent: #ffffff;
+  --surface-inverse: #0b1630;
+  --surface-inverse-elevated: #13214a;
+  --ink-on-inverse: #f4f7fc;
+  --ink-on-inverse-muted: #a9b6cf;
+  --line: #e3e8f0;
+  --line-strong: #cbd3e1;
+  --hero-bg: #f4f7ff;
+  --hero-ink: #0b1220;
+  --hero-muted: #4b5567;
+  --hero-line: rgba(15, 23, 42, 0.1);
+  --hero-elevated: #ffffff;
 }
 
 html.dark {
-  --bg: #0f1113;
-  --bg-alt: #161a1e;
-  --bg-elevated: #1c2127;
-  --ink: #f2f0eb;
-  --ink-muted: #a8a6a1;
-  --ink-faint: #7a7872;
-  --accent: #ff6b1a;
-  --accent-soft: #2a180f;
-  --accent-deep: #ff853f;
-  --on-accent: #fffaf6;
-  --surface-inverse: #0a0c0e;
-  --surface-inverse-elevated: #14181c;
-  --ink-on-inverse: #f2f0eb;
-  --ink-on-inverse-muted: #a8a6a1;
-  --line: #2a3038;
-  --line-strong: #3a424c;
-  --hero-bg: #0a0c0e;
-  --hero-ink: #f2f0eb;
-  --hero-muted: #a8a6a1;
+  --bg: #0b1020;
+  --bg-alt: #10172a;
+  --bg-elevated: #151d33;
+  --ink: #eef2f8;
+  --ink-muted: #9aa5b8;
+  --ink-faint: #6b768a;
+  --accent: #4f8cff;
+  --accent-soft: #12203f;
+  --accent-deep: #7aa7ff;
+  --on-accent: #ffffff;
+  --surface-inverse: #060a16;
+  --surface-inverse-elevated: #10182e;
+  --ink-on-inverse: #eef2f8;
+  --ink-on-inverse-muted: #9aa5b8;
+  --line: #232c42;
+  --line-strong: #34405a;
+  --hero-bg: #0b1020;
+  --hero-ink: #eef2f8;
+  --hero-muted: #9aa5b8;
   --hero-line: rgba(255, 255, 255, 0.1);
-  --hero-elevated: #14181c;
+  --hero-elevated: #151d33;
 }
 
 @layer base {
@@ -132,7 +132,11 @@ html.dark {
 .animate-fade-up-delay-2 { animation: fade-up 0.7s ease-out 0.2s both; }
 .animate-fade-up-delay-3 { animation: fade-up 0.7s ease-out 0.3s both; }
 
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
   .animate-fade-up,
   .animate-fade-up-delay-1,
   .animate-fade-up-delay-2,

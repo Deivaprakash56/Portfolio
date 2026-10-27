@@ -1,6 +1,6 @@
 # Deivaprakash — Personal Portfolio
 
-Premium personal portfolio for Deivaprakash, built around robotics engineering × customer success × execution.
+Premium personal portfolio for Deivaprakash, built around customer success × robotics × execution.
 
 ## Quick start
 
@@ -19,6 +19,8 @@ npm run preview
 
 Copy, links, and case studies: `src/data/content.ts`
 
-Published numbers (AMRs, PoCs, deployment days, reduction %, international projects, students, CGPA): open `/admin` in the browser. Changes are stored in this browser.
+Published numbers (AMRs, PoCs, deployment days, international projects, students, CGPA): `src/data/numbers.ts`. The deployment-time reduction % is calculated from the before/after days.
 
-Resume PDF: `public/resume.pdf` (download buttons are not shown on the site).
+Resume PDF: `public/resume.pdf` (linked from the hero and Contact section).
+
+Social preview image: `public/og-image.png` (1200×630, rendered from `og-image.svg`).
