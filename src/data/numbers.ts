@@ -14,8 +14,8 @@ export interface SiteNumbers {
 
 export const siteNumbers: SiteNumbers = {
   yearsExperience: 3,
-  amrsDeployed: 15,
-  pocs: 35,
+  amrsDeployed: 30,
+  pocs: 50,
   deploymentDaysBefore: 20,
   deploymentDaysAfter: 7,
   internationalProjects: 2,
