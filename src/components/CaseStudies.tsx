@@ -1,11 +1,10 @@
-import { caseStudies } from '../data/content'
+import { caseStudies, caseStudyPhotos } from '../data/content'
 import { useSiteNumbers } from '../lib/numbers'
-import { caseIllustrations } from './CaseIllustrations'
 import { Reveal } from './Reveal'
 import { Section } from './Section'
 
 export function CaseStudies() {
-  const { fill, numbers } = useSiteNumbers()
+  const { fill } = useSiteNumbers()
   return (
     <Section
       id="case-studies"
@@ -15,16 +14,29 @@ export function CaseStudies() {
     >
       <div className="space-y-16 md:space-y-24">
         {caseStudies.map((study, i) => {
-          const Illustration = caseIllustrations[study.slug]
+          const shot = caseStudyPhotos[study.slug]
           const flip = i % 2 === 1
           return (
             <Reveal key={study.id}>
               <div className="group grid items-center gap-8 md:grid-cols-2 md:gap-14">
                 <div
-                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-bg-alt p-4 transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:shadow-[0_24px_48px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] ${flip ? 'md:order-2' : ''}`}
+                  className={`relative aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-bg-alt transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:shadow-[0_24px_48px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] ${flip ? 'md:order-2' : ''}`}
                 >
-                  <div className="pointer-events-none absolute inset-0 grid-tech opacity-60" aria-hidden />
-                  <div className="relative h-full">{Illustration ? <Illustration n={numbers} /> : null}</div>
+                  {shot && (
+                    <>
+                      <img
+                        src={shot.src}
+                        alt={shot.alt}
+                    style={{ objectPosition: shot.position }}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      />
+                      <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-5 pt-12 pb-4 text-sm font-medium text-white">
+                        {shot.caption}
+                      </p>
+                    </>
+                  )}
                 </div>
                 <div className={flip ? 'md:order-1' : ''}>
                   <p className="font-mono text-xs tracking-[0.16em] text-accent uppercase">

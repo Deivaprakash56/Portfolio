@@ -132,11 +132,29 @@ html.dark {
 .animate-fade-up-delay-2 { animation: fade-up 0.7s ease-out 0.2s both; }
 .animate-fade-up-delay-3 { animation: fade-up 0.7s ease-out 0.3s both; }
 
+/* Skills: data flowing from me to both sides, and items ticking in. */
+@keyframes flow { to { stroke-dashoffset: -24; } }
+.flow-line { stroke-dasharray: 6 6; animation: flow 1.2s linear infinite; }
+@keyframes tick-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.skill-item { opacity: 0; }
+.is-visible .skill-item { animation: tick-in 0.45s ease-out both; }
+
+/* Field gallery: two photo strips scrolling in opposite directions. */
+@keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.marquee-left { animation: marquee-left 60s linear infinite; }
+.marquee-right { animation: marquee-right 60s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-left, .marquee-right { animation: none; }
+  .flow-line { animation: none; }
+  .skill-item, .is-visible .skill-item { opacity: 1; animation: none; }
+  .marquee { overflow-x: auto; }
   .animate-fade-up,
   .animate-fade-up-delay-1,
   .animate-fade-up-delay-2,

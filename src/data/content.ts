@@ -8,13 +8,6 @@ export type LinkState =
   | { status: 'ready'; href: string; label?: string }
   | { status: 'pending'; note: string }
 
-export type SkillLevel = 'hands-on' | 'familiar' | 'conceptual'
-
-export interface Skill {
-  name: string
-  level: SkillLevel
-}
-
 export interface Metric {
   id: string
   value: number
@@ -142,7 +135,7 @@ export const journey: JourneyStage[] = [
     title: 'Customer Success Manager – Fleet Deployments',
     period: 'Current',
     summary: 'When a customer orders a fleet instead of one or two robots, I own the project end to end, from scoping and site feasibility through rollout and handover, separate from the standard deployment team.',
-    highlights: ['Fleet-scale projects owned from scratch', 'Customer’s single point of contact', 'Scoping, rollout and handover'],
+    highlights: ['Fleet-scale projects owned from scratch', 'Leading a team of engineers on fleet deployments', 'Customer’s single point of contact', 'Scoping, rollout and handover'],
   },
   {
     id: 'senior-deployment-engineer',
@@ -226,77 +219,28 @@ export const caseStudies: CaseStudy[] = [
 ]
 
 export const customerSuccessSteps = [
-  { step: 1, title: 'Learn the job', detail: 'Start with what moves, how often, and what gets in the way.' },
-  { step: 2, title: 'Make it measurable', detail: 'Payload, path, cycle time, safety, and the site itself.' },
-  { step: 3, title: 'Check if it fits', detail: 'Say whether the robot can do this job before anyone promises it.' },
-  { step: 4, title: 'Keep people aligned', detail: 'Hardware, software, and the customer stay on the same outcome.' },
-  { step: 5, title: 'Prove it on site', detail: 'Test in the real workflow, not only in a tidy demo.' },
-  { step: 6, title: 'Hand it over', detail: 'Docs and ownership so the system still works after we leave.' },
+  { step: 1, title: 'Site Discovery', detail: 'Walk the floor to learn what moves, how often, and what gets in the way.' },
+  { step: 2, title: 'Success Metrics', detail: 'Pin down payload, path, cycle time, safety, and site conditions.' },
+  { step: 3, title: 'Feasibility Check', detail: 'Confirm the robot can do this job before anyone promises it.' },
+  { step: 4, title: 'Stakeholder Alignment', detail: 'Keep hardware, software, and the customer working toward one outcome.' },
+  { step: 5, title: 'On-Site Validation', detail: 'Test in the real workflow, not just in a tidy demo.' },
+  { step: 6, title: 'Handover & Training', detail: 'Documentation and training so the system runs long after we leave.' },
 ]
 
-export const skillCategories: { title: string; description: string; skills: Skill[] }[] = [
-  {
-    title: 'Deployment and Leadership',
-    description: 'Where the work meets the customer',
-    skills: [
-      { name: 'Customer-facing engineering', level: 'hands-on' },
-      { name: 'Technical demonstrations & PoCs', level: 'hands-on' },
-      { name: 'AMR feasibility assessment', level: 'hands-on' },
-      { name: 'Deployment coordination', level: 'hands-on' },
-      { name: 'Customer handover & documentation', level: 'hands-on' },
-      { name: 'Cross-functional technical communication', level: 'hands-on' },
-      { name: 'Team-building & technical management', level: 'hands-on' },
-    ],
+/** Skills, split to show both sides of the role. Keep each list short. */
+export const skills = {
+  customer: {
+    title: 'Customer Success',
+    tagline: 'I own the customer outcome',
+    items: ['Fleet deployment ownership', 'Site feasibility', 'Demos & PoCs', 'Stakeholder alignment', 'Handover & training', 'Team leadership'],
   },
-  {
-    title: 'Robotics and Navigation',
-    description: 'What I run on the robot',
-    skills: [
-      { name: 'ROS 2 Humble', level: 'hands-on' },
-      { name: 'Nav2', level: 'hands-on' },
-      { name: 'RViz / RViz2', level: 'hands-on' },
-      { name: 'Foxglove', level: 'hands-on' },
-      { name: 'Gazebo', level: 'hands-on' },
-      { name: 'Webots', level: 'hands-on' },
-      { name: 'Cartographer', level: 'hands-on' },
-      { name: 'MoveIt', level: 'hands-on' },
-    ],
+  technical: {
+    title: 'Technical',
+    tagline: 'I can build and fix the robot',
+    items: ['ROS 2 & Nav2', 'Python & Bash', 'Gazebo · RViz2 · Foxglove', 'LiDAR & sensor integration', 'PLC & Modbus TCP', 'Cobots: FANUC, ABB'],
   },
-  {
-    title: 'Programming and Tools',
-    description: 'Daily tools',
-    skills: [
-      { name: 'Python', level: 'hands-on' },
-      { name: 'Bash', level: 'hands-on' },
-      { name: 'Git & Linux workflows', level: 'hands-on' },
-      { name: 'Markdown & technical documentation', level: 'hands-on' },
-    ],
-  },
-  {
-    title: 'Robotics Systems and Integration',
-    description: 'Robot, sensors, and the plant',
-    skills: [
-      { name: 'Autonomous mobile robots', level: 'hands-on' },
-      { name: '2D and 3D LiDAR', level: 'hands-on' },
-      { name: 'Depth cameras & Intel NUC platforms', level: 'hands-on' },
-      { name: 'IMU & encoder-based localization concepts', level: 'conceptual' },
-      { name: 'ROS 2 control concepts', level: 'familiar' },
-      { name: 'PLC & industrial system integration', level: 'familiar' },
-      { name: 'Modbus TCP', level: 'familiar' },
-      { name: 'Robot commissioning & troubleshooting', level: 'hands-on' },
-    ],
-  },
-  {
-    title: 'Industrial Robotics',
-    description: 'Arms I have worked with',
-    skills: [
-      { name: 'FANUC ecosystem', level: 'familiar' },
-      { name: 'ABB ecosystem', level: 'familiar' },
-      { name: 'Techman', level: 'familiar' },
-      { name: 'Fairino', level: 'familiar' },
-    ],
-  },
-]
+  team: 'Currently leading a team of engineers handling fleet deployments',
+}
 
 
 
@@ -311,8 +255,84 @@ export const feasibilityPipeline = [
   'Handover',
 ]
 
+const photo = (name: string) => `${import.meta.env.BASE_URL}photos/${name}.jpg`
+
+export interface Photo {
+  src: string
+  alt: string
+  caption: string
+  /** CSS object-position for the crop, e.g. '50% 30%'. */
+  position?: string
+}
+
+/** Field impact: one real deployment photo per result, keyed by case study slug. */
+export const caseStudyPhotos: Record<string, Photo> = {
+  'reducing-amr-deployment-time': { src: photo('production-line'), alt: 'AMR with a conveyor top module on a live production line', caption: 'Commissioned on a live production line' },
+  'industrial-amr-proof-of-concepts': { src: photo('forklift-amr'), alt: 'Autonomous forklift being tested in a warehouse with laser floor markings', caption: 'Autonomous forklift trial at a customer warehouse' },
+  'production-deployment-and-handover': { src: photo('go-live-ceremony'), alt: 'AMR in a warehouse aisle during a go-live ceremony', caption: 'Go-live day: the customer takes over the fleet', position: '50% 65%' },
+  'technical-feasibility-and-performance': { src: photo('goods-lift'), alt: 'AMR carrying a trolley out of a goods lift', caption: 'Checked before promised: AMR riding a goods lift', position: '50% 35%' },
+}
+
+
+/** Field gallery: more robots I have worked on and deployed. */
+export const gallery: Photo[] = [
+  { src: photo('robot-fleet'), alt: 'A fleet of AMRs lined up before dispatch', caption: 'A fleet ready to ship' },
+  { src: photo('warehouse-aisle'), alt: 'AMR initializing in a warehouse aisle', caption: 'Navigating a busy warehouse aisle', position: '50% 28%' },
+  { src: photo('teleop-demo'), alt: 'Deivaprakash driving an AMR with a controller', caption: 'Bring-up and teleop testing', position: '50% 82%' },
+  { src: photo('docking-station'), alt: 'AMR docked at a charging station with a fiducial marker', caption: 'Marker-based auto-docking to a charger' },
+  { src: photo('cobot-on-amr'), alt: 'Collaborative robot arm mounted on an AMR in a factory', caption: 'Cobot mounted on an AMR', position: '50% 38%' },
+  { src: photo('pallet-mover'), alt: 'Autonomous pallet mover next to a loaded pallet in a factory', caption: 'Autonomous pallet mover on the factory floor', position: '70% 60%' },
+  { src: photo('cobot-expo'), alt: 'Mobile manipulator with a cobot arm on an AMR at an expo', caption: 'Mobile manipulator demo', position: '50% 30%' },
+  { src: photo('pre-deployment-test'), alt: 'AMR under test beside a charging dock', caption: 'Pre-deployment testing' },
+  { src: photo('gtx1500-expo'), alt: 'Heavy-payload AMR displayed at an industry expo', caption: 'Heavy-payload AMR at an industry expo', position: '50% 70%' },
+  { src: photo('eyantra-arena'), alt: 'Warehouse robotics competition arena with an AMR and shelves', caption: 'e-Yantra warehouse arena' },
+  { src: photo('security-patrol'), alt: 'Outdoor patrol robot with a camera mast', caption: 'Outdoor patrol robot trial', position: '50% 55%' },
+]
+
+const logo = (name: string) => `${import.meta.env.BASE_URL}logos/${name}.png`
+
+/** Customer sites I have personally worked at or deployed robots for. */
+export const sites: { name: string; logo: string }[] = [
+  { name: 'Toyota', logo: logo('toyota') },
+  { name: 'Maruti Suzuki', logo: logo('maruti-suzuki') },
+  { name: 'Amazon', logo: logo('amazon') },
+  { name: 'GE Vernova', logo: logo('ge-vernova') },
+  { name: 'Tata Electronics', logo: logo('tata-electronics') },
+  { name: 'Yazaki', logo: logo('yazaki') },
+  { name: 'Autoliv', logo: logo('autoliv') },
+  { name: 'Lear', logo: logo('lear') },
+  { name: 'Legrand', logo: logo('legrand') },
+  { name: 'Grundfos', logo: logo('grundfos') },
+  { name: 'Timken', logo: logo('timken') },
+  { name: 'Poclain Hydraulics', logo: logo('poclain') },
+  { name: 'Pricol', logo: logo('pricol') },
+  { name: 'Granules', logo: logo('granules') },
+  { name: 'Milky Mist', logo: logo('milky-mist') },
+  { name: 'Shahi Exports', logo: logo('shahi') },
+  { name: 'KK Wind Solutions', logo: logo('kk-wind') },
+  { name: 'Lucy Electric', logo: logo('lucy-electric') },
+  { name: 'Janatics', logo: logo('janatics') },
+  { name: 'Coral Coil', logo: logo('coral-coil') },
+  { name: 'SRG Apparels', logo: logo('srg-apparels') },
+  { name: 'Maxbyte', logo: logo('maxbyte') },
+  { name: 'Ausweg', logo: logo('ausweg') },
+  { name: 'Cabra Move (US)', logo: logo('cabra-move') },
+  { name: 'ALCA (Australia)', logo: logo('alcarail') },
+  { name: 'Stematic', logo: logo('stematic') },
+  { name: 'Electronics Devices Worldwide', logo: logo('electronics-devices') },
+  { name: 'SUA Automation', logo: logo('sua') },
+]
+
+/** Academic and research institutions I have worked with. */
+export const institutions: { name: string; logo: string }[] = [
+  { name: 'IIT Bombay', logo: logo('iit-bombay') },
+  { name: 'IISc Bangalore', logo: logo('iisc') },
+  { name: 'Sri Eshwar College of Engineering', logo: logo('sri-eshwar-emblem') },
+]
+
 export const nav = [
   { label: 'Work', href: '#case-studies' },
+  { label: 'Gallery', href: '#gallery' },
   { label: 'How I work', href: '#customer-success' },
   { label: 'Experience', href: '#journey' },
   { label: 'Skills', href: '#skills' },
