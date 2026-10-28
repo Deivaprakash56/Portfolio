@@ -18,6 +18,15 @@ const nodes: Node[] = [
   ...skills.technical.items.map((label, i) => toNode(label, spread(skills.technical.items.length, -70, 70)[i], 'technical')),
 ]
 
+// Phones: the same hub, rotated. Customer skills above, technical skills below, two per row.
+const stack = (items: string[], side: Node['side'], ys: number[]): Node[] =>
+  items.map((label, i) => ({ label, side, x: i % 2 === 0 ? 26 : 74, y: ys[Math.floor(i / 2)] }))
+
+const phoneNodes: Node[] = [
+  ...stack(skills.customer.items, 'customer', [5, 14, 23]),
+  ...stack(skills.technical.items, 'technical', [77, 86, 95]),
+]
+
 const pill = {
   customer: 'bg-accent text-white shadow-[0_10px_24px_-12px_var(--accent)]',
   technical: 'bg-dark text-white shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)]',
@@ -35,14 +44,14 @@ function Hub({ className = '' }: { className?: string }) {
           <Bot size={18} />
         </span>
       </span>
-      <p className="mt-3 font-display text-xl font-bold tracking-tight">Techno-Customer Success</p>
+      <p className="mt-3 font-display text-lg font-bold tracking-tight whitespace-nowrap sm:text-xl">Techno-Customer Success</p>
       <p className="text-sm text-ink-muted">where customer success meets engineering</p>
     </div>
   )
 }
 
 export function Skills() {
-  const { customer, technical, team } = skills
+  const { team } = skills
   return (
     <Section id="skills" eyebrow="Skills" title="Customer-facing. Engineer at heart." className="bg-bg-alt" wide>
       {/* Desktop: hub-and-spoke diagram */}
@@ -83,23 +92,36 @@ export function Skills() {
         </div>
       </div>
 
-      {/* Phones: hub on top, skills as chips below */}
-      <div className="lg:hidden">
-        <Hub />
-        {[customer, technical].map((group, g) => (
-          <div key={group.title} className="mt-8">
-            <p className="flex items-center gap-2 font-mono text-xs tracking-[0.16em] text-ink-muted uppercase">
-              {g === 0 ? <Handshake size={14} className="text-accent" aria-hidden /> : <Cpu size={14} aria-hidden />}
-              {group.title}
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {group.items.map((item) => (
-                <li key={item} className={`rounded-full px-3.5 py-1.5 text-sm font-medium ${pill[g === 0 ? 'customer' : 'technical']}`}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Phones: same hub-and-spoke, customer skills above and technical below */}
+      <div className="relative h-[760px] lg:hidden" role="list" aria-label="Skills">
+        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+          {phoneNodes.map((n) => (
+            <line
+              key={n.label}
+              x1="50"
+              y1="50"
+              x2={n.x}
+              y2={n.y}
+              className={`flow-line ${n.side === 'customer' ? 'stroke-accent' : 'stroke-ink-faint'}`}
+              strokeWidth="1.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+        </svg>
+
+        <div className="absolute top-1/2 left-1/2 w-[20rem] max-w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-[2rem] border border-line bg-bg-elevated px-4 py-5 shadow-[0_24px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)]">
+          <Hub />
+        </div>
+
+        {phoneNodes.map((n, i) => (
+          <span
+            key={n.label}
+            role="listitem"
+            className={`skill-item absolute w-[46%] -translate-x-1/2 -translate-y-1/2 rounded-2xl px-2.5 py-2 text-center text-[13px] leading-tight font-medium ${pill[n.side]}`}
+            style={{ left: `${n.x}%`, top: `${n.y}%`, animationDelay: `${200 + i * 70}ms` }}
+          >
+            {n.label}
+          </span>
         ))}
       </div>
 
