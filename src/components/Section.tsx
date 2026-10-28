@@ -9,9 +9,11 @@ interface SectionProps {
   children: ReactNode
   dark?: boolean
   className?: string
+  /** Let the title run the full width instead of wrapping at 3xl. */
+  wide?: boolean
 }
 
-export function Section({ id, eyebrow, title, description, children, dark = false, className = '' }: SectionProps) {
+export function Section({ id, eyebrow, title, description, children, dark = false, className = '', wide = false }: SectionProps) {
   return (
     <section
       id={id}
@@ -19,7 +21,7 @@ export function Section({ id, eyebrow, title, description, children, dark = fals
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
-          <header className="mb-12 max-w-3xl md:mb-16">
+          <header className={`mb-12 md:mb-16 ${wide ? '' : 'max-w-3xl'}`}>
             {eyebrow && (
               <p className={`mb-4 inline-flex items-center gap-3 font-mono text-xs font-medium tracking-[0.18em] uppercase ${dark ? 'text-accent' : 'text-accent-deep'}`}>
                 <span className="h-px w-8 bg-current" aria-hidden />

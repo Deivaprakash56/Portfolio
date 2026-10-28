@@ -1,5 +1,5 @@
-import { Cpu, Handshake, Users } from 'lucide-react'
-import { hero, skills } from '../data/content'
+import { Bot, Cpu, Handshake, Users } from 'lucide-react'
+import { skills } from '../data/content'
 import { Section } from './Section'
 
 type Node = { label: string; side: 'customer' | 'technical'; x: number; y: number }
@@ -29,11 +29,14 @@ function Hub({ className = '' }: { className?: string }) {
       <span className="relative flex h-28 w-28 items-center justify-center">
         <span className="absolute inset-0 animate-ping rounded-full bg-accent/20 [animation-duration:2.6s] motion-reduce:animate-none" aria-hidden />
         <span className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-bg-alt ring-2 ring-accent">
-          <img src={hero.portrait.src} alt="" className="h-full w-full object-cover object-[50%_25%]" />
+          <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="" width={96} height={96} className="h-full w-full object-cover" />
+        </span>
+        <span className="absolute -right-1 -bottom-1 flex h-10 w-10 items-center justify-center rounded-full border-4 border-bg-elevated bg-gradient-to-br from-accent to-[#06b6d4] text-white shadow-lg" aria-hidden>
+          <Bot size={18} />
         </span>
       </span>
-      <p className="mt-3 font-display text-xl font-bold tracking-tight">Customer Success</p>
-      <p className="text-sm text-ink-muted">backed by hands-on engineering</p>
+      <p className="mt-3 font-display text-xl font-bold tracking-tight">Techno-Customer Success</p>
+      <p className="text-sm text-ink-muted">where customer success meets engineering</p>
     </div>
   )
 }
@@ -41,7 +44,7 @@ function Hub({ className = '' }: { className?: string }) {
 export function Skills() {
   const { customer, technical, team } = skills
   return (
-    <Section id="skills" eyebrow="Skills" title="Customer-facing. Engineer at heart." className="bg-bg-alt">
+    <Section id="skills" eyebrow="Skills" title="Customer-facing. Engineer at heart." className="bg-bg-alt" wide>
       {/* Desktop: hub-and-spoke diagram */}
       <div className="relative hidden h-[520px] lg:block" role="list" aria-label="Skills">
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
